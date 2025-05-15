@@ -52,8 +52,10 @@
             border: none;
         }
     </style>
+    <!-- 引入通用JS文件 -->
+    <script src="assets/js/common.js" defer></script>
 </head>
-<body class="bg-light text-dark antialiased">
+<body id="home" class="bg-light text-dark antialiased">
     <header class="bg-white text-dark py-5 shadow-sm sticky top-0 z-50">
         <div class="container mx-auto px-6 md:px-10">
             <div class="flex justify-between items-center">
@@ -216,23 +218,7 @@
                 const targetId = this.getAttribute('href');
                 const targetElement = document.querySelector(targetId);
                 if (targetElement) {
-                    let headerOffset = 90; // 减少Offset值来增加滚动幅度（从100减少到90）
-                    if (window.innerWidth < 768) { // md breakpoint in Tailwind
-                        headerOffset = 72; // 减少Offset值来增加滚动幅度（从80减少到72）
-                    }
-
-                    const elementRect = targetElement.getBoundingClientRect();
-                    const elementTopRelativeToDocument = elementRect.top + window.pageYOffset;
-                    const elementHeight = targetElement.offsetHeight;
-                    const viewportHeight = window.innerHeight;
-
-                    // 增加滚动幅度系数(1.1)，增加约1/10的滚动幅度
-                    const offsetPosition = (elementTopRelativeToDocument - (viewportHeight / 2) + (elementHeight / 2) - headerOffset) * 1.1;
-
-                    window.scrollTo({
-                        top: offsetPosition,
-                        behavior: 'smooth'
-                    });
+                    scrollToElement(targetElement);
                     
                     // Close mobile menu if open and a link is clicked
                     const mobileMenu = document.getElementById('mobile-menu');

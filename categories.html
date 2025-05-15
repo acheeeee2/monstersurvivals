@@ -31,41 +31,19 @@
     <style>
         body { font-family: 'Inter', sans-serif; }
     </style>
+    <!-- 引入通用JS文件 -->
+    <script src="assets/js/common.js" defer></script>
 </head>
 <body class="bg-light text-dark antialiased">
     <!-- Header -->
     <header class="bg-white text-dark py-5 shadow-sm sticky top-0 z-50">
         <div class="container mx-auto px-6 md:px-10">
-            <div class="flex justify-between items-center">
-                <div class="text-center md:text-left">
-                    <a href="/" class="text-3xl font-bold text-primary hover:text-opacity-80 transition duration-300">MonsterSurvivors</a>
-                </div>
-                <nav class="hidden md:flex">
-                    <ul class="flex space-x-8 items-center">
-                        <li><a href="index.html#game" class="text-base font-medium text-gray-700 hover:text-primary transition duration-300">Play Now</a></li>
-                        <li><a href="categories.html" class="text-base font-medium text-primary transition duration-300">Game Categories</a></li>
-                        <li><a href="index.html#about" class="text-base font-medium text-gray-700 hover:text-primary transition duration-300">About</a></li>
-                        <li><a href="index.html#instructions" class="text-base font-medium text-gray-700 hover:text-primary transition duration-300">How to Play</a></li>
-                        <li><a href="index.html#game" class="bg-primary text-white px-6 py-2 rounded-lg font-medium hover:bg-opacity-90 transition duration-300 shadow-md hover:shadow-lg">Play Free</a></li>
-                    </ul>
-                </nav>
-                <div class="md:hidden">
-                    <button id="mobile-menu-button-categories" class="text-gray-700 hover:text-primary focus:outline-none">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
-                    </button>
-                </div>
+            <div class="flex justify-center">
+                <a href="/" class="text-3xl font-bold text-primary hover:text-opacity-80 transition duration-300">MonsterSurvivors</a>
             </div>
         </div>
-        <!-- Mobile Menu -->
-        <div id="mobile-menu-categories" class="hidden md:hidden bg-white shadow-lg absolute top-full left-0 right-0 z-40">
-            <ul class="flex flex-col items-center space-y-4 py-4">
-                <li><a href="index.html#game" class="text-base font-medium text-gray-700 hover:text-primary transition duration-300">Play Now</a></li>
-                <li><a href="categories.html" class="text-base font-medium text-primary transition duration-300">Game Categories</a></li>
-                <li><a href="index.html#about" class="text-base font-medium text-gray-700 hover:text-primary transition duration-300">About</a></li>
-                <li><a href="index.html#instructions" class="text-base font-medium text-gray-700 hover:text-primary transition duration-300">How to Play</a></li>
-                <li><a href="index.html#game" class="bg-primary text-white px-8 py-3 rounded-lg font-medium hover:bg-opacity-90 transition duration-300 shadow-md">Play Free</a></li>
-            </ul>
-        </div>
+        <!-- 装饰性分隔线 -->
+        <div class="w-32 h-1 bg-secondary mx-auto mt-4 mb-4 rounded"></div>
     </header>
 
     <!-- Main Content -->
@@ -129,7 +107,6 @@
                 <div>
                     <h2 class="text-xl font-semibold mb-5 text-gray-200">Quick Links</h2>
                     <ul class="space-y-3">
-                        <li><a href="index.html#game" class="text-gray-400 hover:text-primary transition duration-300">Play Now</a></li>
                         <li><a href="categories.html" class="text-gray-400 hover:text-primary transition duration-300">Game Categories</a></li>
                         <li><a href="index.html#about" class="text-gray-400 hover:text-primary transition duration-300">About</a></li>
                         <li><a href="index.html#instructions" class="text-gray-400 hover:text-primary transition duration-300">How to Play</a></li>
@@ -164,15 +141,6 @@
                 }
             });
         }
-        // Smooth scrolling for anchor links in index.html (if navigating from here)
-        document.querySelectorAll('a[href^="index.html#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                const href = this.getAttribute('href');
-                if (href.includes('#')) {
-                    // If it's an internal link to index, let the browser handle default behavior to navigate and then scroll
-                }
-            });
-        });
     </script>
 </body>
 </html> 

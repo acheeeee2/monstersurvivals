@@ -29,6 +29,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../../../assets/css/game.css">
+    <script src="../../../assets/js/common.js" defer></script>
     <style>
         body { font-family: 'Inter', sans-serif; }
     </style>
@@ -43,7 +44,7 @@
                 </div>
                 <nav class="hidden md:flex">
                     <ul class="flex space-x-8 items-center">
-                        <li><a href="../../../index.html#game" class="text-base font-medium text-gray-700 hover:text-primary transition duration-300">Play Now (Featured)</a></li>
+                        <li><a href="#game-section" class="bg-primary text-white px-6 py-2 rounded-xl font-semibold hover:bg-opacity-90 transition duration-300 shadow-lg hover:shadow-xl transform hover:scale-105">Play Now</a></li>
                         <li><a href="../../../categories.html" class="text-base font-medium text-gray-700 hover:text-primary transition duration-300">Game Categories</a></li>
                         <li><a href="../../../index.html#about" class="text-base font-medium text-gray-700 hover:text-primary transition duration-300">About</a></li>
                     </ul>
@@ -57,7 +58,7 @@
         </div>
         <div id="mobile-menu-game" class="hidden md:hidden bg-white shadow-lg absolute top-full left-0 right-0 z-40">
             <ul class="flex flex-col items-center space-y-4 py-4">
-                <li><a href="../../../index.html#game" class="text-base font-medium text-gray-700 hover:text-primary transition duration-300">Play Now (Featured)</a></li>
+                <li><a href="#game-section" class="bg-primary text-white px-6 py-2 rounded-xl font-semibold hover:bg-opacity-90 transition duration-300 shadow-lg hover:shadow-xl transform hover:scale-105">Play Now</a></li>
                 <li><a href="../../../categories.html" class="text-base font-medium text-gray-700 hover:text-primary transition duration-300">Game Categories</a></li>
                 <li><a href="../../../index.html#about" class="text-base font-medium text-gray-700 hover:text-primary transition duration-300">About</a></li>
             </ul>
@@ -76,7 +77,7 @@
         <h1 class="text-4xl md:text-5xl font-extrabold mb-8 text-dark leading-tight">Slither.io</h1>
 
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 md:gap-12 mb-12">
-            <div class="lg:col-span-2 game-iframe-container rounded-xl shadow-2xl overflow-hidden border border-gray-200">
+            <div id="game-section" class="lg:col-span-2 game-iframe-container rounded-xl shadow-2xl overflow-hidden border border-gray-200">
                 <div class="iframe-loader">Loading...</div>
                 <iframe loading="lazy" aria-label="Slither.io游戏窗口" src="https://slither.io/" title="Slither.io Game" class="game-iframe" sandbox="allow-scripts allow-same-origin" allowfullscreen onload="this.previousElementSibling.style.display='none'"></iframe>
             </div>
@@ -127,7 +128,7 @@
                 <div>
                     <h2 class="text-xl font-semibold mb-5 text-gray-200">Quick Links</h2>
                     <ul class="space-y-3">
-                        <li><a href="../../../index.html#game" class="text-gray-400 hover:text-primary transition duration-300">Play Now (Featured)</a></li>
+                        <li><a href="#game-section" class="bg-primary text-white px-6 py-2 rounded-xl font-semibold hover:bg-opacity-90 transition duration-300 shadow-lg hover:shadow-xl transform hover:scale-105">Play Now</a></li>
                         <li><a href="../../../categories.html" class="text-gray-400 hover:text-primary transition duration-300">Game Categories</a></li>
                         <li><a href="../../../index.html#about" class="text-gray-400 hover:text-primary transition duration-300">About</a></li>
                     </ul>
