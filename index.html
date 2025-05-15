@@ -216,9 +216,9 @@
                 const targetId = this.getAttribute('href');
                 const targetElement = document.querySelector(targetId);
                 if (targetElement) {
-                    let headerOffset = 100; // Offset for sticky header on desktop
+                    let headerOffset = 90; // 减少Offset值来增加滚动幅度（从100减少到90）
                     if (window.innerWidth < 768) { // md breakpoint in Tailwind
-                        headerOffset = 80; // Offset for sticky header on mobile
+                        headerOffset = 72; // 减少Offset值来增加滚动幅度（从80减少到72）
                     }
 
                     const elementRect = targetElement.getBoundingClientRect();
@@ -226,9 +226,8 @@
                     const elementHeight = targetElement.offsetHeight;
                     const viewportHeight = window.innerHeight;
 
-                    // Calculate the scroll position to center the element in the viewport,
-                    // then adjust for the sticky header.
-                    const offsetPosition = elementTopRelativeToDocument - (viewportHeight / 2) + (elementHeight / 2) - headerOffset;
+                    // 增加滚动幅度系数(1.1)，增加约1/10的滚动幅度
+                    const offsetPosition = (elementTopRelativeToDocument - (viewportHeight / 2) + (elementHeight / 2) - headerOffset) * 1.1;
 
                     window.scrollTo({
                         top: offsetPosition,
