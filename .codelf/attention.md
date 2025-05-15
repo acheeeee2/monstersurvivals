@@ -1,95 +1,60 @@
-## Development Guidelines
+## 开发指南
 
-### Framework and Language
-> Analyze the framework and language choices for this project, focusing on best practices and standardization.
+### 框架和语言
+> 本项目使用原生HTML、CSS和JavaScript，同时采用Tailwind CSS进行样式管理，已从单页应用重构为多页面门户。
 
-**Framework Considerations:**
-- Version Compatibility: Ensure all dependencies are compatible with the chosen framework version
-- Feature Usage: Leverage framework-specific features rather than reinventing solutions
-- Performance Patterns: Follow recommended patterns for optimal performance
-- Upgrade Strategy: Plan for future framework updates with minimal disruption
-- Importance Notes for Framework: 
-	* {important notes}
+**框架注意事项:**
+- Tailwind CSS: 使用Tailwind提供的工具类来构建UI，避免编写自定义CSS。
+- 版本兼容性: 确保所有CDN引用的资源版本相互兼容。
+- 功能使用: 优先使用Tailwind提供的原生功能而不是重新发明解决方案。
+- 性能模式: 遵循推荐的模式以获得最佳性能。
+- 框架重要说明: 
+	* 使用Tailwind CDN版本进行快速开发，生产环境应考虑优化为编译版本。
+	* 多页面跳转将通过标准的HTML链接实现。
 
-**Language Best Practices:**
-- Type Safety: Use strong typing where available to prevent runtime errors
-- Modern Features: Utilize modern language features while maintaining compatibility
-- Consistency: Apply consistent coding patterns throughout the codebase
-- Documentation: Document language-specific implementations and workarounds
+**语言最佳实践:**
+- 代码组织: 确保HTML结构清晰，CSS样式组织良好。采用推荐的目录结构组织各页面和游戏资源。
+- 现代特性: 利用现代HTML5和CSS3特性，保持向后兼容性。
+- 一致性: 在整个代码库中应用一致的编码模式，特别是在使用 `game-detail-template.html` 创建新游戏页面时。
+- 注释: 对复杂的实现和解决方案进行注释说明。
+- URL和文件命名：保持URL和文件名的小写，使用连字符 `-` 分隔单词，确保可读性和SEO友好。
 
-### Code Abstraction and Reusability
-> During development, prioritize code abstraction and reusability to ensure modular and component-based functionality. Try to search for existing solutions before reinventing the wheel.
-> List below the directory structure of common components, utility functions, and API encapsulations in the current project.
+### 代码抽象和可重用性
+> 通过 `game-detail-template.html` 实现游戏详情页的标准化，提升开发效率和一致性。未来可考虑将头部、尾部等公共部分抽离为可复用模板片段（如果采用更高级的构建工具或后端渲染）。
 
+**模块化设计原则:**
+- 单一职责: 每个HTML页面应有明确的功能（如首页、分类页、游戏详情页）。
+- 高内聚低耦合: 相关功能集中在对应页面，页面间通过链接跳转。
+- 稳定接口: 页面间的链接URL应保持稳定。
 
-**Modular Design Principles:**
-- Single Responsibility: Each module is responsible for only one functionality
-- High Cohesion, Low Coupling: Related functions are centralized, reducing dependencies between modules
-- Stable Interfaces: Expose stable interfaces externally while internal implementations can vary
-
-**Reusable Component Library:**
-e.g.
+**可重用组件/模板:**
 ```
 root
-- pkg 
-    - utils
-		- time // include time related functions: getNow, getToday, getYesterday, etc.
-    - views
+|-- game-detail-template.html // 通用游戏详情页模板
+|-- (未来可能加入的partials，如 _header.html, _footer.html 如果引入模板引擎)
 ```
 
-### Coding Standards and Tools
-**Code Formatting Tools:**
-- [ESLint (version)]() // JavaScript/TypeScript code checking
-- [Prettier (version)]() // Code formatting
-- [StyleLint (version)]() // CSS/SCSS code checking
+### 编码标准和工具
 
-**Naming and Structure Conventions:**
-- Semantic Naming: Variable/function names should clearly express their purpose
-- Consistent Naming Style: Frontend uses camelCase, CSS uses kebab-case
-- Directory Structure follows functional responsibility division
+**命名和结构约定:**
+- 语义化命名: HTML标签、CSS类名、JS变量/函数名应清晰表达其目的。
+- 一致的命名风格: HTML属性和文件名使用kebab-case，JavaScript使用camelCase。
+- **目录结构**: 遵循 `/games/[category]/[game-name]/index.html` 的模式组织游戏页面和资源。分类列表页存放于 `/category/[category-name].html`。
 
-### Frontend-Backend Collaboration Standards
-**API Design and Documentation:**
-- RESTful design principles
-	* Use HTTP methods (GET, POST, PUT, DELETE) to represent operations
-	...
-- Timely interface documentation updates
-	* Document API endpoints, parameters, and responses
-	...
-- Unified error handling specifications
-	...
-	
+### 性能和安全
+**性能优化重点:**
+- 资源加载优化
+	* 使用CDN加载外部资源 (Tailwind, Google Fonts)。
+	* 确保游戏资源（图片、视频、游戏包）经过适当压缩和优化。
+	* 考虑对图片使用懒加载（lazy loading），尤其是在游戏列表页。
+- 渲染性能优化
+	* 避免不必要的DOM操作。
+	* 保持CSS选择器简单，优先使用Tailwind工具类。
+- 适当使用缓存
+	* 利用浏览器缓存静态资源。
 
-**Data Flow:**
-- Clear frontend state management
-	* Use a state management library (e.g., Redux, Pinia) for consistent state handling
-	...
-- Data validation on both frontend and backend
-	* Validate data types and constraints
-	...
-- Standardized asynchronous operation handling
-	* Use consistent API call patterns
-	...
-
-### Performance and Security
-**Performance Optimization Focus:**
-- Resource loading optimization
-	* Use code splitting and lazy loading
-	...
-- Rendering performance optimization
-	* Use virtualization and pagination for large lists
-	...
-- Appropriate use of caching
-	* Implement caching strategies for API responses
-	...
-
-**Security Measures:**
-- Input validation and filtering
-	* Validate user inputs and sanitize data
-	...
-- Protection of sensitive information
-	* Use secure authentication and authorization mechanisms
-	...
-- Access control mechanisms
-	* Implement role-based access control
-	...
+**安全措施:**
+- 安全连接: 推荐部署在HTTPS环境下。
+- 输入验证和过滤: 对于搜索框功能，未来实现时需考虑对用户输入进行清理。
+- 第三方资源审核: 定期审核和更新CDN链接和嵌入的第三方游戏内容，确保其安全性。
+- iframe沙箱: 对于嵌入的第三方游戏，考虑使用iframe的 `sandbox` 属性增强安全性（如果游戏兼容）。

@@ -65,6 +65,7 @@
                         <li><a href="#game" class="text-base font-medium text-gray-700 hover:text-primary transition duration-300">Play Now</a></li>
                         <li><a href="#about" class="text-base font-medium text-gray-700 hover:text-primary transition duration-300">About</a></li>
                         <li><a href="#instructions" class="text-base font-medium text-gray-700 hover:text-primary transition duration-300">How to Play</a></li>
+                        <li><a href="categories.html" class="text-base font-medium text-gray-700 hover:text-primary transition duration-300">Game Categories</a></li>
                         <li><a href="#game" class="bg-primary text-white px-6 py-2 rounded-lg font-medium hover:bg-opacity-90 transition duration-300 shadow-md hover:shadow-lg">Play Free</a></li>
                     </ul>
                 </nav>
@@ -81,6 +82,7 @@
                 <li><a href="#game" class="text-base font-medium text-gray-700 hover:text-primary transition duration-300">Play Now</a></li>
                 <li><a href="#about" class="text-base font-medium text-gray-700 hover:text-primary transition duration-300">About</a></li>
                 <li><a href="#instructions" class="text-base font-medium text-gray-700 hover:text-primary transition duration-300">How to Play</a></li>
+                <li><a href="categories.html" class="text-base font-medium text-gray-700 hover:text-primary transition duration-300">Game Categories</a></li>
                 <li><a href="#game" class="bg-primary text-white px-8 py-3 rounded-lg font-medium hover:bg-opacity-90 transition duration-300 shadow-md">Play Free</a></li>
             </ul>
         </div>
@@ -94,7 +96,7 @@
             <p class="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto mb-10 leading-relaxed">
                 Experience the ultimate thrill! Survive endless waves of monsters, upgrade your hero, and conquer the leaderboard in this action-packed adventure.
             </p>
-            <div>
+            <div class="mt-8">
                 <a href="#game" class="bg-primary text-white px-10 py-4 rounded-xl font-semibold text-lg hover:bg-opacity-90 transition duration-300 shadow-lg hover:shadow-xl transform hover:scale-105">
                     Play Now for Free
                 </a>
@@ -215,18 +217,29 @@
                 const targetId = this.getAttribute('href');
                 const targetElement = document.querySelector(targetId);
                 if (targetElement) {
-                    let offset = 100; // Default offset for desktop
-                    if (window.innerWidth < 768) { // md breakpoint
-                        offset = 80; // Smaller offset for mobile if header is smaller
+                    let headerOffset = 100; // Offset for sticky header on desktop
+                    if (window.innerWidth < 768) { // md breakpoint in Tailwind
+                        headerOffset = 80; // Offset for sticky header on mobile
                     }
+
+                    const elementRect = targetElement.getBoundingClientRect();
+                    const elementTopRelativeToDocument = elementRect.top + window.pageYOffset;
+                    const elementHeight = targetElement.offsetHeight;
+                    const viewportHeight = window.innerHeight;
+
+                    // Calculate the scroll position to center the element in the viewport,
+                    // then adjust for the sticky header.
+                    const offsetPosition = elementTopRelativeToDocument - (viewportHeight / 2) + (elementHeight / 2) - headerOffset;
+
                     window.scrollTo({
-                        top: targetElement.offsetTop - offset,
+                        top: offsetPosition,
                         behavior: 'smooth'
                     });
-                    // Close mobile menu if open
+                    
+                    // Close mobile menu if open and a link is clicked
                     const mobileMenu = document.getElementById('mobile-menu');
                     const menuButton = document.getElementById('mobile-menu-button');
-                    if (!mobileMenu.classList.contains('hidden')) {
+                    if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
                         mobileMenu.classList.add('hidden');
                         menuButton.innerHTML = `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>`;
                     }
@@ -237,14 +250,16 @@
         // Mobile menu toggle
         const menuButton = document.getElementById('mobile-menu-button');
         const mobileMenu = document.getElementById('mobile-menu');
-        menuButton.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-            if (mobileMenu.classList.contains('hidden')) {
-                menuButton.innerHTML = `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>`;
-            } else {
-                menuButton.innerHTML = `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>`;
-            }
-        });
+        if (menuButton && mobileMenu) {
+            menuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                if (mobileMenu.classList.contains('hidden')) {
+                    menuButton.innerHTML = `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>`;
+                } else {
+                    menuButton.innerHTML = `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>`;
+                }
+            });
+        }
 
         // Simple analytics tracking (placeholder)
         console.log("Game page loaded, UI enhancements applied.");

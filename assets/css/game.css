@@ -1,0 +1,42 @@
+/* 公用游戏iframe样式 */
+.game-iframe-container {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  background-color: #000;
+}
+.game-iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* 响应式高度适配 */
+@media (min-width: 1024px) {
+  .game-iframe-container {
+    height: 650px;
+  }
+}
+@media (min-width: 768px) and (max-width: 1023px) {
+  .game-iframe-container {
+    height: 75vh;
+  }
+}
+@media (max-width: 767px) {
+  .game-iframe-container {
+    height: 50vh;
+  }
+}
+
+/* 加载器样式 */
+.iframe-loader {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  font-size: 1.25rem;
+} 
